@@ -36,8 +36,7 @@
 }
 
 /* Estilo de los elementos del menú */
-.navbar__item {
-}
+
 
 /* Enlaces */
 .navbar__link {
@@ -65,7 +64,6 @@
 .navbar__button:hover {
   color: #f44336;
 }
-
 #root {
   max-width: 1280px;
   margin: 0 auto;
