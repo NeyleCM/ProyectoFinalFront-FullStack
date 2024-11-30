@@ -8,7 +8,7 @@ const Dashboard = () => {
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const { data } = await fetchProducts(); // Obtener productos back
+        const data = await fetchProducts(); 
         setProducts(data);
       } catch (err) {
         setError('Error al cargar productos');
@@ -21,8 +21,8 @@ const Dashboard = () => {
   const handleCreate = async () => {
     try {
       const newProduct = { name: 'Producto Nuevo', price: 100 };
-      const { data } = await createProduct(newProduct); // Crear producto
-      setProducts([...products, data]); // Actualizar estado
+      const data = await createProduct(newProduct);
+      setProducts([...products, data]); 
     } catch (err) {
       setError('Error al agregar producto');
       console.error('Error:', err);
@@ -30,7 +30,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div>
+    <>
       <h1>Dashboard</h1>
       <button onClick={handleCreate}>Agregar Producto</button>
       {error && <p>{error}</p>}
@@ -41,7 +41,7 @@ const Dashboard = () => {
           </li>
         ))}
       </ul>
-    </div>
+    </>
   );
 };
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PropTypes from "prop-types"; // Importar prop-types
+import PropTypes from "prop-types"; 
 import { UserContext } from "./UserContext";
 
 export const UserProvider = ({ children }) => {
@@ -15,7 +15,6 @@ export const UserProvider = ({ children }) => {
   );
 };
 
-// Validar las props
 UserProvider.propTypes = {
-  children: PropTypes.node.isRequired, // 'children' debe ser un nodo React válido
+  children: PropTypes.node.isRequired,
 };

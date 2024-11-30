@@ -1,15 +1,15 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useUser } from "../context/useUser"; // Importa el hook personalizado
-import "../App.css"; // Estilos específicos del Navbar
+import { useUser } from "../context/useUser"; 
+import "../App.css"; 
 
 const Navbar = () => {
-  const { user, logout } = useUser(); // Accede al estado y las funciones del contexto
+  const { user, logout } = useUser(); 
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    logout(); // Cerrar sesión utilizando el contexto
-    localStorage.removeItem("token"); // Eliminar token si existe
-    navigate("/login"); // Redirigir a la página de login
+    logout(); 
+    localStorage.removeItem("token"); 
+    navigate("/login"); 
   };
 
   return (
