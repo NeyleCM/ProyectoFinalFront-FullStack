@@ -25,6 +25,14 @@ const EditProduct = () => {
     getProduct();
   }, [id]);
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setProduct((prevProduct) => ({
+      ...prevProduct,
+      [name]: value,
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -39,16 +47,16 @@ const EditProduct = () => {
 
   return (
     <div>
-      <h1>Editar Producto</h1>
+      <h1>Crear Producto</h1>
       {error && <p>{error}</p>}
-      
       <form onSubmit={handleSubmit}>
         <div>
           <label>Nombre del Producto</label>
           <input
             type="text"
+            name="name"
             value={product.name}
-            onChange={(e) => setProduct({ ...product, name: e.target.value })} // Actualiza el estado del nombre
+            onChange={handleChange}
             required
           />
         </div>
@@ -56,12 +64,48 @@ const EditProduct = () => {
           <label>Precio</label>
           <input
             type="number"
+            name="price"
             value={product.price}
-            onChange={(e) => setProduct({ ...product, price: e.target.value })} // Actualiza el estado del precio
+            onChange={handleChange}
             required
           />
         </div>
-        <button type="submit">Guardar Cambios</button>
+        <div>
+        <label>Categoría</label>
+          <select
+            name="category"
+            value={product.category}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Seleccione una categoría</option>
+            <option value="Zarcillos">Zarcillos</option>
+            <option value="Bufandas">Bufandas</option>
+            <option value="Anillos">Anillos</option>
+            <option value="Collares">Collares</option>
+          </select>
+        </div>
+        <div>
+          <label>Imagen</label>
+          <input
+            type="text"
+            name="image"
+            value={product.image}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label>Stock</label>
+          <input
+            type="number"
+            name="stock"
+            value={product.stock}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <button type="submit">Editar Producto</button>
       </form>
     </div>
   );

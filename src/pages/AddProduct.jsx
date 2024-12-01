@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { createProduct } from '../services/api'; // Función para crear un producto
+import { createProduct } from '../services/api';
 import { useNavigate } from 'react-router-dom';
 
 const AddProduct = () => {
@@ -8,7 +8,7 @@ const AddProduct = () => {
     price: '',
     category: '',
     image: '', 
-    size: ''
+    stock:''
   });
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -59,14 +59,19 @@ const AddProduct = () => {
           />
         </div>
         <div>
-          <label>Categoría</label>
-          <input
-            type="text"
+        <label>Categoría</label>
+          <select
             name="category"
             value={product.category}
             onChange={handleChange}
             required
-          />
+          >
+            <option value="">Seleccione una categoría</option>
+            <option value="Zarcillos">Zarcillos</option>
+            <option value="Bufandas">Bufandas</option>
+            <option value="Anillos">Anillos</option>
+            <option value="Collares">Collares</option>
+          </select>
         </div>
         <div>
           <label>Imagen</label>
@@ -79,11 +84,11 @@ const AddProduct = () => {
           />
         </div>
         <div>
-          <label>Tamaño</label>
+          <label>Stock</label>
           <input
-            type="text"
-            name="size"
-            value={product.size}
+            type="number"
+            name="stock"
+            value={product.stock}
             onChange={handleChange}
             required
           />

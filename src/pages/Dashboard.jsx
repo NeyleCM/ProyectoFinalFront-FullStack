@@ -38,14 +38,16 @@ const Dashboard = () => {
 
   const handleDelete = async (productId) => {
     try {
+      if (!productId) {
+        throw new Error('El ID del producto no es válido');
+      }
       await deleteProduct(productId); 
-      setProducts(products.filter(product => product.id !== productId)); 
-    } catch (err) {
+      setProducts(products.filter(product => product._id !== productId)); 
+      } catch (err) {
       setError('Error al eliminar producto');
       console.error('Error:', err);
-    }
+      }
   };
-
 
   return (
     <>
@@ -60,14 +62,15 @@ const Dashboard = () => {
           products.map((product) => (
             <li key={product._id}>
               {product.name} - {product.price}€ - {product.image} - {product.size}
-              <button onClick={() => handleEdit(product._id)}>Editar</button>
-              <button onClick={() => handleDelete(product.id)}>Eliminar</button>
+              <button onClick={() => handleEdit(product.id)}>Editar</button>
+              <button onClick={() => handleDelete(product._id)}>Eliminar</button>
             </li>
           ))
         )}
       </ul>
     </div>
     </>
+
   /* return (
     <>
       <h1>Dashboard</h1>
