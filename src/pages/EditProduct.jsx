@@ -9,6 +9,7 @@ const EditProduct = () => {
     name: '',
     price: '',
     talla:'',
+    category:''
   });
   const [error, setError] = useState(null);
   useEffect(() => {
@@ -27,9 +28,9 @@ const EditProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const updatedProduct = await updateProduct(id, product); // Actualiza el producto
+      const updatedProduct = await updateProduct(id, product); 
       console.log('Producto actualizado:', updatedProduct);
-      navigate('/dashboard'); // Redirige al Dashboard después de la edición
+      navigate('/dashboard'); 
     } catch (err) {
       setError('Error al actualizar el producto');
       console.error('Error:', err);

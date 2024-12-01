@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { fetchProducts, createProduct } from '../services/api';
+import { fetchProducts, createProduct, deleteProduct } from '../services/api';
 import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
@@ -36,7 +36,19 @@ const Dashboard = () => {
     navigate(`/edit-product/${productId}`);  
   };
 
+  const handleDelete = async (productId) => {
+    try {
+      await deleteProduct(productId); 
+      setProducts(products.filter(product => product.id !== productId)); 
+    } catch (err) {
+      setError('Error al eliminar producto');
+      console.error('Error:', err);
+    }
+  };
+
+
   return (
+    <>
     <div>
       <h1>Dashboard</h1>
         <button onClick={handleCreate}>Crear Producto</button>
@@ -47,13 +59,15 @@ const Dashboard = () => {
         ) : (
           products.map((product) => (
             <li key={product._id}>
-              {product.name} - {product.price}€
+              {product.name} - {product.price}€ - {product.image} - {product.size}
               <button onClick={() => handleEdit(product._id)}>Editar</button>
+              <button onClick={() => handleDelete(product.id)}>Eliminar</button>
             </li>
           ))
         )}
       </ul>
     </div>
+    </>
   /* return (
     <>
       <h1>Dashboard</h1>

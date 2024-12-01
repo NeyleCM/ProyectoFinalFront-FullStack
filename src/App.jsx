@@ -7,6 +7,8 @@ import EditProduct from './pages/EditProduct'
 import Login from './pages/Login';
 import Navbar from './components/Navbar';
 import PrivateRoute from './components/PrivateRoute';
+import CategoryPage from './pages/CategoryPage'
+
 
 function App() {
   return (
@@ -16,14 +18,15 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-      <Route 
-          path="/dashboard" 
-          element={<PrivateRoute>
-                    <Dashboard />
-                  </PrivateRoute>} 
-      />
-      <Route path="/add-product" element={<AddProduct />} />
-      <Route path="/edit-product/:id" element={<EditProduct />} />
+        <Route 
+            path="/dashboard" 
+            element={<PrivateRoute>
+                      <Dashboard />
+                    </PrivateRoute>} 
+        />
+        <Route path="/add-product" element={<AddProduct />} />
+        <Route path="/edit-product/:id" element={<EditProduct />} />
+        <Route path="/category/:category" element={<CategoryPage />} />
       </Routes>
     </Router>
     </UserProvider>

@@ -1,29 +1,49 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useUser } from "../context/useUser"; 
+import { getAuth, signOut } from "firebase/auth"; 
 import "../App.css"; 
+
+const categories = ['Zarcillos', 'Bufandas', 'Anillos', 'Collares', 'Todos'];
 
 const Navbar = () => {
   const { user, logout } = useUser(); 
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const handleLogout = () => {
-    logout(); 
-    localStorage.removeItem("token"); 
-    navigate("/login"); 
+  const handleLogout = async () => {
+    try {
+      const auth = getAuth();
+      await signOut(auth); 
+      logout(); 
+      navigate("/login"); 
+    } catch (error) {
+      console.error("Error al cerrar sesión", error);
+    }
   };
-
   return (
     <>
     <nav className="navbar">
-         <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/add-product">Agregar Producto</Link></li>
+        {/*{window.location.pathname*/} 
+        {location.pathname  !== '/' &&
+          <Link to="/">Home</Link>
+        }
+        
+        {categories.map((category) => (
+          <Link key={category} to={`/category/${category}`}>{category}</Link>
+        ))}
+      
         {user ? (
-          <li><button onClick={handleLogout}>Logout</button></li>
+          <>
+           {/*{window.location.pathname*/}
+           {location.pathname !== '/dashboard' && 
+              <Link to="/dashboard">Dashboard</Link>
+            }
+            <Link to="/add-product">Agregar Producto</Link>
+            <button onClick={handleLogout}>Logout</button>
+          </>
         ) : (
-          <li><Link to="/login">Login</Link></li>
+          <Link to="/login">Login</Link>
         )}
-      </ul>
     </nav>
     </>
   );
