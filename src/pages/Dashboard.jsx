@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { fetchProducts, createProduct } from '../services/api';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getProducts = async () => {
@@ -29,7 +31,30 @@ const Dashboard = () => {
     }
   };
 
+  const handleEdit = (productId) => {
+    console.log('Editando producto con ID:', productId);
+    navigate(`/edit-product/${productId}`);  
+  };
+
   return (
+    <div>
+      <h1>Dashboard</h1>
+        <button onClick={handleCreate}>Crear Producto</button>
+      {error && <p>{error}</p>}
+      <ul>
+        {products.length === 0 ? (
+          <li>No hay productos disponibles</li> 
+        ) : (
+          products.map((product) => (
+            <li key={product._id}>
+              {product.name} - {product.price}€
+              <button onClick={() => handleEdit(product._id)}>Editar</button>
+            </li>
+          ))
+        )}
+      </ul>
+    </div>
+  /* return (
     <>
       <h1>Dashboard</h1>
       <button onClick={handleCreate}>Agregar Producto</button>
@@ -42,7 +67,8 @@ const Dashboard = () => {
         ))}
       </ul>
     </>
-  );
+  );*/
+  )
 };
 
 export default Dashboard;

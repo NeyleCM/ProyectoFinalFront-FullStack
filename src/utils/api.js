@@ -3,7 +3,6 @@ const BASE_URL = 'https://proyectofinal-fullstackdev.onrender.com'; // Tu backen
 export const fetchData = async (endpoint, options = {}) => {
   const token = localStorage.getItem("token");
 
-  // Si el token existe, lo añadimos a los headers de la solicitud
   const headers = {
     ...options.headers,
     Authorization: token ? `Bearer ${token}` : "",

@@ -13,35 +13,19 @@ const Navbar = () => {
   };
 
   return (
+    <>
     <nav className="navbar">
-      <div className="navbar__container">
-        <Link to="/" className="navbar__logo">
-          MyApp
-        </Link>
-
-        <ul className="navbar__menu">
-          <li className="navbar__item">
-            <Link to="/" className="navbar__link">Home</Link>
-          </li>
-          {user ? (
-            <>
-              <li className="navbar__item">
-                <Link to="/dashboard" className="navbar__link">Dashboard</Link>
-              </li>
-              <li className="navbar__item">
-                <button className="navbar__link navbar__button" onClick={handleLogout}>
-                  Logout
-                </button>
-              </li>
-            </>
-          ) : (
-            <li className="navbar__item">
-              <Link to="/login" className="navbar__link">Login</Link>
-            </li>
-          )}
-        </ul>
-      </div>
+         <ul>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/add-product">Agregar Producto</Link></li>
+        {user ? (
+          <li><button onClick={handleLogout}>Logout</button></li>
+        ) : (
+          <li><Link to="/login">Login</Link></li>
+        )}
+      </ul>
     </nav>
+    </>
   );
 };
 
