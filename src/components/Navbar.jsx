@@ -15,6 +15,7 @@ const Navbar = () => {
       const auth = getAuth();
       await signOut(auth); 
       logout(); 
+      localStorage.removeItem("token");
       navigate("/login"); 
     } catch (error) {
       console.error("Error al cerrar sesión", error);
@@ -38,8 +39,8 @@ const Navbar = () => {
            {location.pathname !== '/dashboard' && 
               <Link to="/dashboard">Dashboard</Link>
             }
-            <Link to="/add-product">Agregar Producto</Link>
-            <button onClick={handleLogout}>Logout</button>
+              <Link to="/add-product">Agregar Producto</Link>
+              <button onClick={handleLogout}>Logout</button>
           </>
         ) : (
           <Link to="/login">Login</Link>

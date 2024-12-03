@@ -13,9 +13,14 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null); 
+
     try {
       const userCredential = await signInWithEmailAndPassword(auth, credentials.email, credentials.password);
       const user = userCredential.user;
+
+      const token = await user.getIdToken();
+      localStorage.setItem('token', token); 
+      
       login(user); 
       navigate('/dashboard'); 
     } catch (err) {

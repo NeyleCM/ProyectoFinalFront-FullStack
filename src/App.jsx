@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { UserProvider } from "./context/UserProvider";
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
@@ -9,11 +9,11 @@ import Navbar from './components/Navbar';
 import PrivateRoute from './components/PrivateRoute';
 import CategoryPage from './pages/CategoryPage'
 
+const App = () => {
 
-function App() {
   return (
+    <>
     <UserProvider>
-    <Router>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -28,8 +28,8 @@ function App() {
         <Route path="/edit-product/:id" element={<EditProduct />} />
         <Route path="/category/:category" element={<CategoryPage />} />
       </Routes>
-    </Router>
     </UserProvider>
+    </>
   );
 }
 

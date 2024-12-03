@@ -1,8 +1,22 @@
 import axios from 'axios';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 
 const API_URL = 'https://proyectofinal-fullstackdev.onrender.com/api';
 
+export const loginUser = (credentials) => {
+  return axios.post(`${API_URL}/auth/login`, credentials)
+    .then(response => {
+      if (response.data.token) {
+        localStorage.setItem("token", response.data.token);
+      }
+      return response.data; 
+    })
+    .catch(error => {
+      throw error; 
+    });
+};
+
+/*
 export const loginUser = (credentials) => {
   const { email, password } = credentials;
 
@@ -17,7 +31,7 @@ export const loginUser = (credentials) => {
       throw error; 
     });
 };
-
+*/
 export const fetchProducts = async () => {
   try {
     const response = await axios.get(`${API_URL}/products`);
@@ -98,6 +112,29 @@ export const deleteProduct = async (id) => {
 
 export const updateProduct = async (id, updatedProduct) => {
   try {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      throw new Error("Usuario no autenticado");
+    }
+
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`, 
+    };
+
+    const response = await axios.put(`${API_URL}/products/${id}`, updatedProduct, { headers });
+    return response.data;
+
+  } catch (error) {
+    console.error("Error al actualizar producto:", error.message);
+    throw error;
+  }
+};
+
+/*
+export const updateProduct = async (id, updatedProduct) => {
+  try {
     const auth = getAuth();
     const user = auth.currentUser;
 
@@ -118,6 +155,7 @@ export const updateProduct = async (id, updatedProduct) => {
     throw error;
   }
 };
+*/
 
 /*import axios from 'axios';
 import { getAuth } from 'firebase/auth';
