@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { fetchProducts, createProduct, deleteProduct } from '../services/api';
+import { fetchProducts, deleteProduct } from '../services/api';
 import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
@@ -7,6 +7,25 @@ const Dashboard = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/login'); 
+    } else {
+      const getProducts = async () => {
+        try {
+          const data = await fetchProducts(); 
+          setProducts(data);
+        } catch (err) {
+          setError('Error al cargar productos');
+          console.error('Error:', err);
+        }
+      };
+      getProducts();
+    }
+  }, [navigate]);
+
+/*
   useEffect(() => {
     const getProducts = async () => {
       try {
@@ -19,17 +38,7 @@ const Dashboard = () => {
     };
     getProducts();
   }, []);
-
-  const handleCreate = async () => {
-    try {
-      const newProduct = { name: 'Producto Nuevo', price: 100 };
-      const data = await createProduct(newProduct);
-      setProducts([...products, data]); 
-    } catch (err) {
-      setError('Error al agregar producto');
-      console.error('Error:', err);
-    }
-  };
+*/
 
   const handleEdit = (productId) => {
     console.log('Editando producto con ID:', productId);
@@ -50,6 +59,36 @@ const Dashboard = () => {
   };
 
   return (
+
+    <>
+    <div className="container">
+      <h1 className="my-4">Dashboard</h1>      
+      {error && <p className="text-danger">{error}</p>}
+      
+      {products.length === 0 ? (
+        <p>No hay productos disponibles</p> 
+      ) : (
+        <div className="row">
+          {products.map((product) => (
+            <div className="col-md-4" key={product._id}>
+              <div className="card mb-4">
+                <img src={product.image} alt={product.name} className="card-img-top" />
+                <div className="card-body">
+                  <h5 className="card-title">{product.name}</h5>
+                  <p className="card-text">Precio: {product.price}€</p>
+                  <p className="card-text">Categoría: {product.category}</p>
+                  <p className="card-text">Stock: {product.stock}</p>
+                  <button className="btn btn-info mr-2" onClick={() => handleEdit(product._id)}>Editar</button>
+                  <button className="btn btn-danger" onClick={() => handleDelete(product._id)}>Eliminar</button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  </>
+    /*
     <>
     <div>
       <h1>Dashboard</h1>
@@ -70,21 +109,7 @@ const Dashboard = () => {
       </ul>
     </div>
     </>
-
-  /* return (
-    <>
-      <h1>Dashboard</h1>
-      <button onClick={handleCreate}>Agregar Producto</button>
-      {error && <p>{error}</p>}
-      <ul>
-        {products.map((product) => (
-          <li key={product.id}>
-            {product.name} - ${product.price}
-          </li>
-        ))}
-      </ul>
-    </>
-  );*/
+*/
   )
 };
 

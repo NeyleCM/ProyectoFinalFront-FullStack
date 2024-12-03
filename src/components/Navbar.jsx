@@ -3,7 +3,7 @@ import { useUser } from "../context/useUser";
 import { getAuth, signOut } from "firebase/auth"; 
 import "../App.css"; 
 
-const categories = ['Zarcillos', 'Bufandas', 'Anillos', 'Collares', 'Todos'];
+const categories = ['Zarcillos', 'Bufandas', 'Anillos', 'Collares'];
 
 const Navbar = () => {
   const { user, logout } = useUser(); 
@@ -39,7 +39,7 @@ const Navbar = () => {
            {location.pathname !== '/dashboard' && 
               <Link to="/dashboard">Dashboard</Link>
             }
-              <Link to="/add-product">Agregar Producto</Link>
+              <Link to="/add-product">Crear Producto</Link>
               <button onClick={handleLogout}>Logout</button>
           </>
         ) : (
