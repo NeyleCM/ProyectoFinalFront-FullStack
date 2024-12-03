@@ -47,7 +47,7 @@ const EditProduct = () => {
 
   return (
     <div>
-      <h1>Crear Producto</h1>
+      <h1>Editar Producto</h1>
       {error && <p>{error}</p>}
       <form onSubmit={handleSubmit}>
         <div>
