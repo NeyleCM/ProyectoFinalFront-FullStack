@@ -44,7 +44,10 @@ const Navbar = () => {
               <button onClick={handleLogout}>Logout</button>
           </>
         ) : (
-          <Link to="/login">Login</Link>
+          <div>
+            <Link to="/login">Login</Link>
+            <Link to="/register">Registrarse</Link>
+          </div>
         )}
     </nav>
     </>

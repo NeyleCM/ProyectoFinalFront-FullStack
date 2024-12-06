@@ -11,4 +11,9 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
+// Desactivar reCAPTCHA (si es necesario)
+const auth = getAuth(app);
+
+auth.useDeviceLanguage();
+
+export { auth };

@@ -6,11 +6,11 @@ import Dashboard from './pages/Dashboard';
 import AddProduct from './pages/AddProduct';
 import EditProduct from './pages/EditProduct'
 import Login from './pages/Login';
+import RegisterUser from './pages/RegisterUser';
 import Navbar from './components/Navbar';
 import PrivateRoute from './components/PrivateRoute';
 import CategoryPage from './pages/CategoryPage'
-import ProductDetails from './pages/ProductDetails';
-import WishlistPage from './pages/WishlistPage';
+import WishlistPage from './pages/WishlistPage'
 
 const App = () => {
 
@@ -22,6 +22,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<RegisterUser />} />
         <Route 
             path="/dashboard" 
             element={<PrivateRoute>
@@ -31,7 +32,6 @@ const App = () => {
         <Route path="/add-product" element={<AddProduct />} />
         <Route path="/edit-product/:id" element={<EditProduct />} />
         <Route path="/category/:category" element={<CategoryPage />} />
-        <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/wishlist" element={<WishlistPage />} />
       </Routes>
     </UserProvider>
