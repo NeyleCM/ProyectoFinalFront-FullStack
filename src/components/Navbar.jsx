@@ -1,7 +1,6 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useUser } from "../context/useUser"; 
 import { getAuth, signOut } from "firebase/auth"; 
-import "../App.css"; 
 
 const categories = ['Zarcillos', 'Bufandas', 'Anillos', 'Collares'];
 
@@ -29,6 +28,8 @@ const Navbar = () => {
           <Link to="/">Home</Link>
         }
         
+        <Link to="/wishlist">Mi Lista de Deseos</Link>
+
         {categories.map((category) => (
           <Link key={category} to={`/category/${category}`}>{category}</Link>
         ))}

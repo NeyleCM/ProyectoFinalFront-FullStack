@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { UserProvider } from "./context/UserProvider";
+import { WishlistProvider } from './context/WishlistContext';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import AddProduct from './pages/AddProduct';
@@ -8,11 +9,14 @@ import Login from './pages/Login';
 import Navbar from './components/Navbar';
 import PrivateRoute from './components/PrivateRoute';
 import CategoryPage from './pages/CategoryPage'
+import ProductDetails from './pages/ProductDetails';
+import WishlistPage from './pages/WishlistPage';
 
 const App = () => {
 
   return (
     <>
+    <WishlistProvider>
     <UserProvider>
       <Navbar />
       <Routes>
@@ -27,8 +31,11 @@ const App = () => {
         <Route path="/add-product" element={<AddProduct />} />
         <Route path="/edit-product/:id" element={<EditProduct />} />
         <Route path="/category/:category" element={<CategoryPage />} />
+        <Route path="/product/:id" element={<ProductDetails />} />
+        <Route path="/wishlist" element={<WishlistPage />} />
       </Routes>
     </UserProvider>
+    </WishlistProvider>
     </>
   );
 }
