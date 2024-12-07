@@ -11,7 +11,6 @@ import Navbar from './components/Navbar';
 import PrivateRoute from './components/PrivateRoute';
 import CategoryPage from './pages/CategoryPage'
 import WishlistPage from './pages/WishlistPage'
-import Profile from './pages/Profile'
 
 const App = () => {
 
@@ -24,7 +23,6 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<RegisterUser />} />
-        <Route path="/auth/profile" element={<Profile />} />
         <Route 
             path="/dashboard" 
             element={<PrivateRoute>

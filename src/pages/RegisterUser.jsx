@@ -22,16 +22,15 @@ function RegisterUser() {
       const token = await user.getIdToken();
       localStorage.setItem("authToken", token);
 
- 
       await axiosConfig.post(
-        "/profile",  
+        "/register",  
         { uid: user.uid, name, email },
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
       setUser({ uid: user.uid, name, email });
 
-      navigate("/profile");
+      navigate("/login");
     } catch (error) {
       setError(error.message);
     }

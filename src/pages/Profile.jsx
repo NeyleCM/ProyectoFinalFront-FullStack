@@ -11,7 +11,7 @@ const Profile = () => {
     if (user) {
       const fetchUserDetails = async () => {
         try {
-          const response = await axiosConfig.get("/profile", {
+          const response = await axiosConfig.get("/auth/profile", {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("authToken")}`, 
             },
