@@ -1,50 +1,44 @@
 import { useState, useEffect } from "react";
 import { UserContext } from "./UserContext";
-import { getAuth, onAuthStateChanged } from "firebase/auth"; 
 import PropTypes from "prop-types";
-import axios from "../services/axiosConfig"; 
+import axiosConfig from "../services/axiosConfig"; 
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const auth = getAuth(); 
-    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
-      setLoading(true); 
+    const fetchUser = async () => {
+      setLoading(true);
+      const token = localStorage.getItem("authToken");
 
-      if (firebaseUser) {
-        const token = await firebaseUser.getIdToken(); 
-        localStorage.setItem("authToken", token); 
-
+      if (token) {
         try {
-
-          const response = await axios.get("/", {
+          const response = await axiosConfig.get("/profile", {
             headers: { Authorization: `Bearer ${token}` },
           });
-          setUser(response.data); 
+          setUser(response.data);
         } catch (error) {
           console.error("Error al obtener el usuario:", error);
-          setUser(null);
+          setUser(null); 
         }
       } else {
         setUser(null); 
       }
+      setLoading(false);
+    };
 
-      setLoading(false); 
-    });
-
-    return () => unsubscribe(); 
+    fetchUser();
   }, []);
 
   const login = (userData) => setUser(userData); 
   const logout = () => {
-    localStorage.removeItem("authToken"); 
+    localStorage.removeItem("authToken");
     setUser(null); 
   };
 
   return (
-    <UserContext.Provider value={{ user, login, logout, loading }}>
+    <UserContext.Provider value={{ user, setUser, login, logout, loading }}>
       {children}
     </UserContext.Provider>
   );

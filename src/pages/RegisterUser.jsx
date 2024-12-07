@@ -9,6 +9,7 @@ function RegisterUser() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("")
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext); 
@@ -23,15 +24,14 @@ function RegisterUser() {
 
  
       await axiosConfig.post(
-        "/",  
+        "/profile",  
         { uid: user.uid, name, email },
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-    
       setUser({ uid: user.uid, name, email });
 
-      navigate("/");
+      navigate("/profile");
     } catch (error) {
       setError(error.message);
     }
@@ -62,6 +62,13 @@ function RegisterUser() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
+        <input
+            type="password"
+            placeholder="Confirm Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+          />
         <button type="submit">Register</button>
       </form>
       {error && <p>{error}</p>}
