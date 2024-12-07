@@ -1,4 +1,4 @@
-const BASE_URL = 'https://proyectofinal-fullstackdev.onrender.com';
+const BASE_URL = 'https://proyectofinal-fullstackdev.onrender.com/api';
 
 export const fetchData = async (endpoint, options = {}) => {
   const token = localStorage.getItem("token");

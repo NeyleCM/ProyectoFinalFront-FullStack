@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { fetchProductById, updateProduct } from '../services/api'; // Importa las funciones de API para obtener y actualizar productos
+import { fetchProductById, updateProduct } from '../services/api'; 
 
 const EditProduct = () => {
   const { id } = useParams(); 

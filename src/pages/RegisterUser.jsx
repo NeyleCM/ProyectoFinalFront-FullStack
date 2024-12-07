@@ -1,5 +1,78 @@
+import { useState, useContext } from "react";
+import { auth } from "../services/firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import axiosConfig from "../services/axiosConfig";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../context/UserContext"; 
+
+function RegisterUser() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const { setUser } = useContext(UserContext); 
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      const token = await user.getIdToken();
+      localStorage.setItem("authToken", token);
+
+ 
+      await axiosConfig.post(
+        "/",  
+        { uid: user.uid, name, email },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+    
+      setUser({ uid: user.uid, name, email });
+
+      navigate("/");
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  return (
+    <div>
+      <h2>Register</h2>
+      <form onSubmit={handleRegister}>
+        <input
+          type="text"
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button type="submit">Register</button>
+      </form>
+      {error && <p>{error}</p>}
+    </div>
+  );
+}
+
+export default RegisterUser;
+
+/*
 import { useState } from "react";
-import { useNavigate } from 'react-router-dom';
 import "../styles/Register.css";
 
 const Register = () => {
@@ -13,7 +86,6 @@ const Register = () => {
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -68,7 +140,6 @@ const Register = () => {
         if (response.ok) {
           setSuccessMessage("Usuario creado con éxito.");
           setFormData({ name: "", email: "", password: "", confirmPassword: "" });
-          navigate("/");
         } else {
           setSuccessMessage(""); 
           setErrors({ apiError: data.error || "Hubo un error al registrar el usuario." });
@@ -155,3 +226,4 @@ const Register = () => {
 };
 
 export default Register;
+*/
