@@ -33,6 +33,7 @@ const Navbar = () => {
         {categories.map((category) => (
           <Link key={category} to={`/category/${category}`}>{category}</Link>
         ))}
+        <Link to="/auth/profile">Mi perfil</Link>
       
         {user ? (
           <>
