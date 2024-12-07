@@ -6,7 +6,6 @@ import Dashboard from './pages/Dashboard';
 import AddProduct from './pages/AddProduct';
 import EditProduct from './pages/EditProduct'
 import Login from './pages/Login';
-import RegisterUser from './pages/RegisterUser';
 import Navbar from './components/Navbar';
 import PrivateRoute from './components/PrivateRoute';
 import CategoryPage from './pages/CategoryPage'
@@ -22,7 +21,6 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<RegisterUser />} />
         <Route 
             path="/dashboard" 
             element={<PrivateRoute>
