@@ -20,6 +20,7 @@ const Login = () => {
 
       const token = await user.getIdToken();
       localStorage.setItem('token', token); 
+      localStorage.setItem('user', JSON.stringify(user));
       
       login(user); 
       navigate('/dashboard'); 
@@ -52,3 +53,64 @@ const Login = () => {
 };
 
 export default Login;
+
+/*
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { auth } from '../services/firebase'; 
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import axios from '../services/axiosConfig'; 
+import { useUser } from '../context/UserContext'; // Importa el contexto para manejar el usuario
+
+const LoginUser = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const { setUser } = useUser(); 
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError(''); 
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      const token = await user.getIdToken();
+      localStorage.setItem('authToken', token);
+
+      setUser({ uid: user.uid, email: user.email });
+
+      navigate('/dashboard');
+    } catch (error) {
+      setError('Error al iniciar sesión. Verifica tus credenciales.', error);
+    }
+  };
+
+  return (
+    <div>
+      <h2>Iniciar sesión</h2>
+      <form onSubmit={handleLogin}>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Contraseña"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button type="submit">Iniciar sesión</button>
+      </form>
+      {error && <p>{error}</p>}
+    </div>
+  );
+};
+
+export default LoginUser;
+*/

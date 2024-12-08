@@ -12,6 +12,7 @@ const EditProduct = () => {
     category:''
   });
   const [error, setError] = useState(null);
+  
   useEffect(() => {
     const getProduct = async () => {
       try {

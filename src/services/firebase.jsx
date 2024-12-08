@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
+import { getAuth,setPersistence, browserSessionPersistence } from 'firebase/auth';
 
 const firebaseConfig = {
     apiKey: "AIzaSyAxXsb5F1MG9g4JpqrFj36lIGkQqCA83Ew",
@@ -14,6 +14,13 @@ const app = initializeApp(firebaseConfig);
 // Desactivar reCAPTCHA (si es necesario)
 const auth = getAuth(app);
 
-auth.useDeviceLanguage();
+setPersistence(auth, browserSessionPersistence)
+  .then(() => {
+    console.log('Persistence set to session.');
+  })
+  .catch((error) => {
+    console.error('Error setting persistence: ', error);
+  });
+
 
 export { auth };

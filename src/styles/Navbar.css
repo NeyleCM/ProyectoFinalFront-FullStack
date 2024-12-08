@@ -1,0 +1,111 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px 20px;
+    position: relative;
+    z-index: 10;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo-image {
+    width: 40px; 
+    height: 40px;
+    margin-right: 10px;
+  }
+  
+  .logo-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333; 
+  }
+  
+  .navbar a {
+    text-decoration: none;
+    color: black;
+    margin-right: 20px;
+    font-size: 16px;
+  }
+  
+  .navbar button {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .menu-toggle {
+    display: none; 
+    cursor: pointer;
+  }
+  
+  .menu-icon {
+    font-size: 30px;
+  }
+  
+  .menu-right {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-end;
+  }
+  
+  .wishlist-link, .login-link {
+    font-size: 20px;
+  }
+   
+  .menu-links {
+    display: flex;
+    justify-content: space-around; 
+    width: 100%;
+    gap: 20px;
+  }
+  
+  .menu-links a {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+  }
+
+  .menu-links > a {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+  }
+
+  .menu-links.open {
+    display: flex;
+  }
+
+  .menu-links .menu-right {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    }
+  
+  @media (max-width: 700px) {
+    .menu-links {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 60px; 
+      left: 0;
+      right: 0;
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+  
+    .menu-toggle {
+      display: block;
+    }
+  
+    .menu-links.open {
+      display: flex;
+    }
+}
+

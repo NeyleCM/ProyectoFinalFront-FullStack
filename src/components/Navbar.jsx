@@ -1,6 +1,10 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useUser } from "../context/useUser"; 
 import { getAuth, signOut } from "firebase/auth"; 
+import { useState, useEffect } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faHeart } from '@fortawesome/free-regular-svg-icons';
+import '../styles/Navbar.css'
 
 
 const categories = ['Zarcillos', 'Bufandas', 'Anillos', 'Collares'];
@@ -9,6 +13,7 @@ const Navbar = () => {
   const { user, logout } = useUser(); 
   const navigate = useNavigate();
   const location = useLocation();
+  const [isMenuOpen, setIsMenuOpen] = useState(false); 
 
   const handleLogout = async () => {
     try {
@@ -21,32 +26,69 @@ const Navbar = () => {
       console.error("Error al cerrar sesión", error);
     }
   };
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location]);
+
+  const isCategoryPage = location.pathname.startsWith('/category/');
+
   return (
     <>
     <nav className="navbar">
-        {location.pathname  !== '/' &&
-          <Link to="/">Home</Link>
-        }
+      <Link to="/" className="logo">
+          <img src="https://images.vexels.com/media/users/3/300009/isolated/preview/03c91ecbc7d2d5089b09956037e5fa0d-letra-n-colorida-pintada.png?width=960" alt="Logo" className="logo-image" />
+          <span className="logo-text">SHOP</span>
+      </Link>
 
-        {!user && categories.map((category) => (
-          <Link key={category} to={`/category/${category}`}>{category}</Link>
-        ))}
+        <div className="menu-toggle" 
+        onClick={toggleMenu}>
+          <span className="menu-icon">
+            ☰
+          </span>
+        </div>
 
-        {!user && <Link to="/wishlist">Mi Lista de Deseos</Link>}
+        <div className={`menu-links ${isMenuOpen ? 'open' : ''}`}>
+          {!user && categories.map((category) => (
+            <Link 
+            key={category} 
+            to={`/category/${category}`}
+            >
+              {category}
+            </Link>
+          ))}
+
+        <div className="menu-right">
+          {!user && (
+            <Link 
+            to="/wishlist" 
+            className="wishlist-link">
+              <FontAwesomeIcon icon={faHeart} />
+            </Link>
+          )}
+          {!user && 
+            <Link 
+            to="/login" 
+            className="login-link">
+            <FontAwesomeIcon icon={faUser} />
+            </Link>}
+            </div>
       
         {user ? (
           <>
-           {location.pathname !== '/dashboard' && 
+           {isCategoryPage && location.pathname !== '/dashboard' && 
               <Link to="/dashboard">Dashboard</Link>
             }
               <Link to="/add-product">Crear Producto</Link>
               <button onClick={handleLogout}>Logout</button>
           </>
-        ) : (
-          <div>
-            <Link to="/login">Login</Link>
-          </div>
-        )}
+          ) :  null 
+        }
+        </div>
     </nav>
     </>
   );
