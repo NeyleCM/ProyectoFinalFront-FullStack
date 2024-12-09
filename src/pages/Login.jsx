@@ -20,7 +20,6 @@ const Login = () => {
 
       const token = await user.getIdToken();
       localStorage.setItem('token', token); 
-      localStorage.setItem('user', JSON.stringify(user));
       
       login(user); 
       navigate('/dashboard'); 

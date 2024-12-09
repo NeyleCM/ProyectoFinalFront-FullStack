@@ -24,9 +24,14 @@ const AddProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault(); 
     try {
-      const newProduct = await createProduct(product);
-      console.log('Producto creado:', newProduct);
-      navigate('/dashboard');
+      // Llamada a la función para crear el producto
+      const successMessage = await createProduct(product);
+      
+      // Muestra el mensaje de éxito si la creación fue exitosa
+      alert(successMessage); // Puedes cambiarlo por un mensaje en el UI de tu app, no solo un alert.
+      
+      navigate('/dashboard'); // Redirige al Dashboard después de la creación
+  
     } catch (err) {
       setError('Error al crear el producto');
       console.error('Error:', err);
