@@ -66,16 +66,15 @@ export const createProduct = async (product) => {
 
     const response = await axios.post(`${API_URL}/products`, product, { headers });
     
-    // Verifica si la creación fue exitosa y muestra un mensaje adecuado
     if (response.status === 201) {
-      return "Producto creado exitosamente"; // Mensaje de éxito
+      return "Producto creado exitosamente"; 
     } else {
       throw new Error('Error al crear el producto');
     }
 
   } catch (error) {
     console.error("Error al crear el producto:", error.message);
-    throw error; // Lanza el error para ser manejado en la función que llama a createProduct
+    throw error; 
   }
 };
 
@@ -122,9 +121,8 @@ export const deleteProduct = async (id) => {
       Authorization: `Bearer ${token}`,
     };
 
-    // Verifica que la URL sea correcta
     const response = await axios.delete(`${API_URL}/products/${id}`, { headers });
-    return response.data; // Esto debería devolver la respuesta que confirme la eliminación
+    return response.data;
 
   } catch (error) {
     console.error("Error al eliminar producto:", error.message);
@@ -132,29 +130,5 @@ export const deleteProduct = async (id) => {
   }
 };
 
-/*
-export const updateProduct = async (id, updatedProduct) => {
-  try {
-    const auth = getAuth();
-    const user = auth.currentUser;
-
-    if (!user) {
-      throw new Error('Usuario no autenticado');
-    }
-    const token = await user.getIdToken();
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`, 
-    };
-
-    const response = await axios.put(`${API_URL}/products/${id}`, updatedProduct, { headers });
-    return response.data;
-
-  } catch (error) {
-    console.error("Error al actualizar producto:", error.message);
-    throw error;
-  }
-};
-*/
 
 

@@ -31,7 +31,7 @@ const WishlistPage = () => {
             </li>
           ))}
         </ul>
-        <button onClick={handleClearWishlist}>Limpiar lista de deseos</button>
+        <button onClick={handleClearWishlist}>Eliminar lista de deseos</button>
         </>
       )}
     </div>
