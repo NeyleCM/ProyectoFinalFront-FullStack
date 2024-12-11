@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { fetchProductById, updateProduct } from '../services/api'; 
+import '../styles/AddProduct.css'
+import '../index.css'
 
 const EditProduct = () => {
   const { id } = useParams(); 
@@ -47,7 +49,7 @@ const EditProduct = () => {
   };
 
   return (
-    <div>
+    <div className="page-container">
       <h1>Editar Producto</h1>
       {error && <p>{error}</p>}
       <form onSubmit={handleSubmit}>
@@ -106,7 +108,10 @@ const EditProduct = () => {
             required
           />
         </div>
-        <button type="submit">Guardar cambios</button>
+        <div className="form-buttons">
+          <button type="submit" className="btn-submit">Guardar cambios</button>
+          <button type="button" className="btn-back" onClick={() => navigate(-1)}>Volver</button>
+        </div>
       </form>
     </div>
   );

@@ -4,17 +4,18 @@ import { fetchProductsByCategory, deleteProduct } from '../services/api';
 import { useUser } from '../context/useUser';
 import { useWishlist } from '../context/WishlistContext'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-regular-svg-icons';
-import '../styles/CategoryPage.css'
+import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons'; 
+import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons'; 
+import '../index.css'
+import '../styles/CategoryPage.css';
 
 const CategoryPage = () => {
   const { category } = useParams();
   const [products, setProducts] = useState([]);
-  const [message, setMessage] = useState(null); 
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true); 
   const { user } = useUser(); 
-  const { wishlist, addToWishlist } = useWishlist();
+  const { wishlist, addToWishlist, removeFromWishlist } = useWishlist();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -45,65 +46,87 @@ const CategoryPage = () => {
     try {
       await deleteProduct(productId);
       setProducts(products.filter((product) => product._id !== productId));
-      setMessage("Producto eliminado con éxito");
     } catch (err) {
       setError('Error al eliminar producto');
       console.error('Error:', err);
     }
   };
 
-  const handleAddToWishlist = (product) => {
+  const toggleWishlist = (product) => {
     const isProductInWishlist = wishlist.some((item) => item._id === product._id);
-  
-    isProductInWishlist 
-      ? setMessage('Este producto ya está en tu lista de deseos') 
-      : (addToWishlist(product), setMessage('Producto agregado a la lista de deseos'));
+
+    if (isProductInWishlist) {
+      removeFromWishlist(product._id); 
+    } else {
+      addToWishlist(product);
+    }
   };
 
   return (
     <div className="container">
-      <h1 className="my-4">Productos en la categoría: {category}</h1>
-      
+      <h1 className="categories-h1">{category}</h1>
       {loading && <p>Cargando productos...</p>} 
-      {message && <p style={{ color: 'green' }}>{message}</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
 
       {products.length === 0 ? (
         <p>No se encontraron productos en esta categoría.</p>
       ) : (
-        <div className="row">
-          {products.map((product) => (
-            <div className="col-md-4" key={product._id}>
-              <div className="card mb-4">
+        <div className="product-grid">
+          {products.map((product) => {
+            const isInWishlist = wishlist.some((item) => item._id === product._id);
+
+            return (
+              <div className="card" key={product._id}>
                 <img 
                   src={product.image} 
                   alt={product.name} 
                   className="card-img-top" 
-                  style={{ height: '250px', objectFit: 'cover' }} 
                 />
                 <div className="card-body">
-                  <h5 className="card-title">{product.name}</h5>                  
-                  <p className="card-text">Precio: {product.price}€</p>
-                  <p className="card-text">Stock: {product.stock}</p>
+                  <h5 className="card-title">{product.name}</h5>
+                  <p className="card-price">{product.price}€</p>
                   
-                  {user ? (
-                    <>
-                      <button className="btn btn-info" onClick={() => handleEdit(product._id)}>
-                        Editar
-                      </button>
-                      <button className="btn btn-danger" onClick={() => handleDelete(product._id)}>
-                        Eliminar
-                      </button>
-                    </>
-                  ) : (
-                    <button className="btn btn-warning" onClick={() => handleAddToWishlist(product)}>
-                     <FontAwesomeIcon icon={faHeart} /> Agregar a mi lista de deseos
-                    </button>
+                  {/* Mostrar stock si el usuario está autenticado */}
+                  {user && (
+                    <p className="card-stock">Stock: {product.stock}</p>
                   )}
+
+                  <div className="card-actions">
+                    {/* Mostrar wishlist solo si el usuario NO está autenticado */}
+                    {!user && (
+                      <button 
+                        className="wishlist-heart" 
+                        onClick={() => toggleWishlist(product)}
+                      >
+                        <FontAwesomeIcon 
+                          icon={isInWishlist ? solidHeart : regularHeart} 
+                          style={{ color: isInWishlist ? 'pink' : 'gray' }}
+                        />
+                      </button>
+                    )}
+                    
+                    {/* Mostrar botones de editar/eliminar si el usuario está autenticado */}
+                    {user && (
+                      <>
+                        <button 
+                          className="btn btn-info" 
+                          onClick={() => handleEdit(product._id)}
+                        >
+                          Editar
+                        </button>
+                        <button 
+                          className="btn btn-danger" 
+                          onClick={() => handleDelete(product._id)}
+                        >
+                          Eliminar
+                        </button>
+                      </>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </div>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { fetchProducts } from '../services/api'; 
 import { useNavigate } from 'react-router-dom';
+import '../index.css'
 
 const Dashboard = () => {
   const [categories, setCategories] = useState([]);

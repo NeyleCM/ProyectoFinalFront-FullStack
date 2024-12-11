@@ -1,57 +1,123 @@
-.card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.container {
+  margin-top: 20px;
 }
 
+.categories-h1 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+/* Grid para las tarjetas */
+.product-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* Tarjetas */
+.card {
+  width: 250px;
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  background-color: #fff;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Imagen */
 .card-img-top {
   width: 100%;
-  height: 200px;
+  height: 180px;
   object-fit: cover;
 }
 
+/* Información */
 .card-body {
   padding: 15px;
+  text-align: center;
 }
+
 
 .card-title {
   font-size: 18px;
   font-weight: bold;
+  color: #333;
   margin-bottom: 10px;
 }
 
-.card-text {
+.card-price {
+  font-size: 14px;
+  color: #555;
   margin-bottom: 10px;
+}
+
+.card-stock {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 15px;
+}
+
+/* Botones */
+.btn {
+  padding: 8px 12px;
+  border-radius: 15px;
+  cursor: pointer;
+  margin: 10px;
 }
 
 .btn-info {
-  background-color: #dd7dc8;
-  color: white;
+  background-color: #e08cebdc;
+  color: #fff;
   border: none;
-  padding: 10px;
-  border-radius: 4px;
-  cursor: pointer;
+}
+
+.btn-info:hover {
+  background-color: #eb66be;
 }
 
 .btn-danger {
-  background-color: #a5277f;
-  color: white;
+  background-color: #eb66be;;
+  color: #fff;
   border: none;
-  padding: 10px;
-  border-radius: 4px;
-  cursor: pointer;
 }
 
-.btn-warning {
-  background-color: #ffc107;
-  color: black;
-  border: none;
-  padding: 10px;
-  border-radius: 4px;
-  cursor: pointer;
+.btn-danger:hover {
+  background-color: #e08cebdc;
 }
 
-.container {
-  margin-top: 20px;
+/* Corazón */
+.wishlist-heart {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #e6c7d6b6; /* Rosado */
+  font-size: 24px;
+  background-color: rgba(255, 105, 180, 0); /* Fondo rosado pálido */
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+/* Hover para el corazón */
+.wishlist-heart:hover {
+  transform: scale(1.2);
+  background-color: rgba(255, 105, 180, 0); /* Fondo más oscuro al pasar el cursor */
+}
+
+/* Si está en la wishlist */
+.wishlist-heart.active {
+  color: #f30d80; /* Color del corazón lleno */
+  background-color: rgba(255, 105, 180, 0.089); /* Fondo rosado más oscuro */
 }

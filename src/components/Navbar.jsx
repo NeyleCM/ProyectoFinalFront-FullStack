@@ -14,6 +14,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false); 
+  
 
   const handleLogout = async () => {
     try {
@@ -35,7 +36,6 @@ const Navbar = () => {
     setIsMenuOpen(false);
   }, [location]);
 
-  const isCategoryPage = location.pathname.startsWith('/category/');
 
   return (
     <>
@@ -80,10 +80,12 @@ const Navbar = () => {
       
         {user ? (
           <>
-           {isCategoryPage && location.pathname !== '/dashboard' && 
+           {location.pathname !== '/dashboard' && (
               <Link to="/dashboard">Dashboard</Link>
-            }
-              <Link to="/add-product">Crear Producto</Link>
+            )}
+            {location.pathname !== '/add-product' && (
+                <Link to="/add-product">Crear Producto</Link>
+            )}
               <button onClick={handleLogout}>Logout</button>
           </>
           ) :  null 

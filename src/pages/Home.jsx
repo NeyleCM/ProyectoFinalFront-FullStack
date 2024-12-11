@@ -1,4 +1,5 @@
 import "../styles/Home.css";
+import '../index.css'
 
 const Home = () => {
   return (

@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { createProduct } from '../services/api';
 import { useNavigate } from 'react-router-dom';
-
+import '../index.css'
+import '../styles/AddProduct.css'
 const AddProduct = () => {
   const [product, setProduct] = useState({
     name: '',
@@ -37,7 +38,7 @@ const AddProduct = () => {
   };
 
   return (
-    <div>
+    <div className="page-container">
       <h1>Crear Producto</h1>
       {error && <p>{error}</p>}
       <form onSubmit={handleSubmit}>
@@ -96,7 +97,10 @@ const AddProduct = () => {
             required
           />
         </div>
-        <button type="submit">Crear Producto</button>
+        <div className="form-buttons">
+          <button type="submit" className="btn-submit">Crear Producto</button>
+          <button type="button" className="btn-back" onClick={() => navigate(-1)}>Volver</button>
+        </div>
       </form>
     </div>
   );

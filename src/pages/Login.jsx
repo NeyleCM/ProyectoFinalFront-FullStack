@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../services/firebase';
 import { useUser } from '../context/useUser'; 
+import '../index.css'
+import '../styles/Login.css'
 
 const Login = () => {
   const { login } = useUser(); 
@@ -15,7 +17,12 @@ const Login = () => {
     setError(null); 
 
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, credentials.email, credentials.password);
+      const userCredential = await signInWithEmailAndPassword(
+        auth, 
+        credentials.email, 
+        credentials.password
+      );
+
       const user = userCredential.user;
 
       const token = await user.getIdToken();
@@ -29,25 +36,58 @@ const Login = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Iniciar Sesión</h1>
-      <input
-        type="email"
-        placeholder="Email"
-        value={credentials.email}
-        onChange={(e) => setCredentials({ ...credentials, email: e.target.value })}
-        required
-      />
-      <input
-        type="password"
-        placeholder="Contraseña"
-        value={credentials.password}
-        onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
-        required
-      />
-      <button type="submit">Iniciar Sesión</button>
-      {error && <p>{error}</p>}
-    </form>
+    <div className="login-container">
+      <form onSubmit={handleSubmit} className="login-form">
+        <h1 className="login-title">Inicia sesión</h1>
+        
+        <div className="form-group">
+          <label htmlFor="email" className="form-label">Email</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="Introduce tu correo"
+            value={credentials.email}
+            onChange={(e) => setCredentials({ ...credentials, email: e.target.value })}
+            className="form-input"
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="password" className="form-label">Contraseña</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="Introduce tu contraseña"
+            value={credentials.password}
+            onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
+            className="form-input"
+            required
+          />
+        </div>
+
+        <div className="form-options">
+          <label className="remember-me">
+            <input type="checkbox" /> Mantener la sesión iniciada
+          </label>
+          <a href="#" className="reset-link">Restablecer contraseña</a>
+        </div>
+
+        <button type="submit" className="login-button">Iniciar sesión</button>
+
+        {error && <p className="error-message">{error}</p>}
+
+        <div className="alternative-login">
+          <span className="divider">O si lo prefieres</span>
+          <button className="alternative-login-button apple">
+            Continuar con Apple
+          </button>
+          <button className="alternative-login-button google">
+            Continuar con Google
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 

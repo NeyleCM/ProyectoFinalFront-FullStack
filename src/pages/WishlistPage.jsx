@@ -1,38 +1,51 @@
 import { useWishlist } from '../context/WishlistContext';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons'; 
+import '../index.css'
+import '../styles/Wishlist.css'; 
 
 const WishlistPage = () => {
-  const { wishlist, removeFromWishlist, clearWishlist } = useWishlist();
+  const { wishlist, removeFromWishlist } = useWishlist();
   const navigate = useNavigate();
 
-  const handleRemove = (productId) => {
-    removeFromWishlist(productId);
-  };
-
-  const handleClearWishlist = () => {
-    clearWishlist();
+  const toggleWishlist = (productId) => {
+    removeFromWishlist(productId); 
   };
 
   return (
-    <div>
+    <div className="wishlist-container">
       <h1>Mi Lista de Deseos</h1>
       {wishlist.length === 0 ? (
         <p>No tienes productos en tu lista de deseos.</p>
       ) : (
-        <>
-        <ul>
+        <div className="product-grid">
           {wishlist.map((product) => (
-            <li key={product._id} style={{ marginBottom: '20px' }}>
-              <img src={product.image} alt={product.name} style={{ width: '100px' }} />
-              <h3>{product.name}</h3>
-              <p>{product.price}€</p>
-              <button onClick={() => handleRemove(product._id)}>Eliminar</button>
-              <button onClick={() => navigate(`/products/${product._id}`)}>Ver producto</button>
-            </li>
+            <div className="card" key={product._id}>
+              <img 
+                src={product.image} 
+                alt={product.name} 
+                className="card-img-top" 
+              />
+              <div className="card-body">
+                <h5 className="card-title">{product.name}</h5>
+                <p className="card-price">{product.price}€</p>
+                <button 
+                  className="wishlist-heart" 
+                  onClick={() => toggleWishlist(product._id)}
+                >
+                  <FontAwesomeIcon icon={solidHeart} style={{ color: 'pink' }} />
+                </button>
+                <button 
+                  className="btn btn-primary" 
+                  onClick={() => navigate(`/products/${product._id}`)}
+                >
+                  Ver producto
+                </button>
+              </div>
+            </div>
           ))}
-        </ul>
-        <button onClick={handleClearWishlist}>Eliminar lista de deseos</button>
-        </>
+        </div>
       )}
     </div>
   );
