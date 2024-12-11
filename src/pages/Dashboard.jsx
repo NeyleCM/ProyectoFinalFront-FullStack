@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { fetchProducts } from '../services/api'; 
 import { useNavigate } from 'react-router-dom';
 import '../index.css'
+import '../styles/Dashboard.css';
 
 const Dashboard = () => {
   const [categories, setCategories] = useState([]);
@@ -28,38 +29,35 @@ const Dashboard = () => {
   const handleCategoryClick = (category) => {
     navigate(`/category/${category}`);
   };
-
-  return (
-    <div className="container">
-      <h1 className="my-4">Dashboard - Categorías</h1>
-      {error && <p className="text-danger">{error}</p>}
-
-      {categories.length === 0 ? (
-        <p>No hay categorías disponibles</p>
-      ) : (
-        <div className="row">
-          {categories.map((category, index) => (
-            <div className="col-md-4" key={index}>
-              <div className="card mb-4">
+  
+    return (
+      <div className="dashboard-container">
+        <h1 className="dashboard-title">Dashboard - Categorías</h1>
+        {error && <p className="dashboard-error">{error}</p>}
+  
+        {categories.length === 0 ? (
+          <p>No hay categorías disponibles</p>
+        ) : (
+          <div className="dashboard-grid">
+            {categories.map((category, index) => (
+              <div className="dashboard-card" key={index}>
                 <img 
                   src={`https://via.placeholder.com/300x200?text=${category}`}
                   alt={category} 
-                  className="card-img-top" 
-                  style={{ objectFit: 'cover', height: '200px' }} 
+                  className="dashboard-card-img" 
                 />
-                <div className="card-body">
-                  <h5 className="card-title">{category}</h5>
-                  <button className="btn btn-info" onClick={() => handleCategoryClick(category)}>
+                <div className="dashboard-card-body">
+                  <h5 className="dashboard-card-title">{category}</h5>
+                  <button className="dashboard-btn" onClick={() => handleCategoryClick(category)}>
                     Ver productos
                   </button>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-};
-
-export default Dashboard;
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  };
+  
+  export default Dashboard;

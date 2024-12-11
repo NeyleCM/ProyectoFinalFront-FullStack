@@ -10,6 +10,11 @@
   gap: 20px;
 }
 
+h1 {
+  text-align: center;
+  font-size: 30px;
+  margin: 20px;
+}
 .card {
   border: 1px solid #ddd;
   border-radius: 5px;

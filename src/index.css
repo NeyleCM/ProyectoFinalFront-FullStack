@@ -65,3 +65,17 @@ p {
   font-family: 'Roboto', sans-serif;
   font-weight: 400; 
 }
+
+.background-container {
+	background: linear-gradient(
+		to right,
+		rgba(238, 144, 168, 0.486),
+		rgba(223, 184, 214, 0.527)
+	  ),
+	  url('https://img.freepik.com/fotos-premium/pluma-abstracta-fondo_71790-240.jpg?w=2000');
+	background-size: cover; /* Asegura que la imagen cubra todo el espacio */
+	background-position: center;
+	min-height: 100vh; /* Asegura que el fondo cubra toda la altura de la ventana */
+	width: 100%; /* Cubre todo el ancho */
+	overflow-x: hidden; /* Evita scroll horizontal si la imagen se desborda */
+  }

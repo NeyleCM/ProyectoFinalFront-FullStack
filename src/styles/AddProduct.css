@@ -2,7 +2,7 @@
     max-width: 500px;
     margin: 100px auto 0 auto;
     padding: 20px;
-    background-color: #ffffff;
+    background-color: #ffffff2c;
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   }
@@ -41,7 +41,7 @@
   }
   
   .btn-submit {
-    background-color: #28a745;
+    background-color: #4ec56a;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -50,7 +50,7 @@
   }
   
   .btn-back {
-    background-color: #dc3545;
+    background-color: #e02f96;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -59,9 +59,11 @@
   }
   
   .btn-submit:hover {
-    background-color: #218838;
+    background-color: #b4f1c2;
+    color: black;
   }
   
   .btn-back:hover {
-    background-color: #c82333;
+    background-color: #e691c2;
+    color: black;
   }
