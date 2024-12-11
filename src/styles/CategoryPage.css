@@ -9,15 +9,15 @@
 }
 
 .product-grid {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Ajuste automático */
+  gap: 20px; /* Espaciado entre tarjetas */
+  justify-content: center; /* Centrar las tarjetas */
+  align-items: stretch;
 }
 
 .card {
-  width: 250px;
+  width: 800px; /* Se ajusta al espacio disponible */
   border: none;
   border-radius: 10px;
   overflow: hidden;
@@ -43,7 +43,6 @@
   padding: 15px;
   text-align: center;
 }
-
 
 .card-title {
   font-size: 18px;
@@ -82,7 +81,7 @@
 }
 
 .btn-danger {
-  background-color: #eb66be;;
+  background-color: #eb66be;
   color: #fff;
   border: none;
 }
@@ -105,7 +104,6 @@
   transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-
 .wishlist-heart:hover {
   transform: scale(1.2);
   background-color: rgba(255, 105, 180, 0); 
@@ -114,4 +112,12 @@
 .wishlist-heart.active {
   color: #f30d80; 
   background-color: rgba(255, 105, 180, 0.089); 
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .product-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px; /* Reducir el espaciado en pantallas pequeñas */
+  }
 }

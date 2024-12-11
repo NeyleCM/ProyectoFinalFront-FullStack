@@ -96,9 +96,9 @@ export const updateProduct = async (id, updatedProduct) => {
 
     const response = await axios.put(`${API_URL}/products/${id}`, updatedProduct, { headers });
     if (response.status === 201) {
-      return "Producto creado exitosamente";
+      return "Producto editado exitosamente";
     } else {
-      throw new Error('Error al crear el producto');
+      throw new Error('Error al editar el producto');
     }
 
   } catch (error) {
