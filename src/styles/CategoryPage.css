@@ -8,7 +8,6 @@
   margin-bottom: 20px;
 }
 
-/* Grid para las tarjetas */
 .product-grid {
   display: flex;
   gap: 20px;
@@ -17,7 +16,6 @@
   gap: 20px;
 }
 
-/* Tarjetas */
 .card {
   width: 250px;
   border: none;
@@ -35,14 +33,12 @@
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Imagen */
 .card-img-top {
   width: 100%;
   height: 180px;
   object-fit: cover;
 }
 
-/* Información */
 .card-body {
   padding: 15px;
   text-align: center;
@@ -68,7 +64,6 @@
   margin-bottom: 15px;
 }
 
-/* Botones */
 .btn {
   padding: 8px 12px;
   border-radius: 15px;
@@ -101,23 +96,22 @@
   position: absolute;
   top: 10px;
   right: 10px;
-  color: #e6c7d6b6; /* Rosado */
+  color: #e6c7d6b6; 
   font-size: 24px;
-  background-color: rgba(255, 105, 180, 0); /* Fondo rosado pálido */
+  background-color: rgba(255, 105, 180, 0); 
   border-radius: 50%;
   padding: 5px;
   cursor: pointer;
   transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-/* Hover para el corazón */
+
 .wishlist-heart:hover {
   transform: scale(1.2);
-  background-color: rgba(255, 105, 180, 0); /* Fondo más oscuro al pasar el cursor */
+  background-color: rgba(255, 105, 180, 0); 
 }
 
-/* Si está en la wishlist */
 .wishlist-heart.active {
-  color: #f30d80; /* Color del corazón lleno */
-  background-color: rgba(255, 105, 180, 0.089); /* Fondo rosado más oscuro */
+  color: #f30d80; 
+  background-color: rgba(255, 105, 180, 0.089); 
 }

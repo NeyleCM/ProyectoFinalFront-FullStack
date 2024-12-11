@@ -86,13 +86,11 @@ const CategoryPage = () => {
                   <h5 className="card-title">{product.name}</h5>
                   <p className="card-price">{product.price}€</p>
                   
-                  {/* Mostrar stock si el usuario está autenticado */}
                   {user && (
                     <p className="card-stock">Stock: {product.stock}</p>
                   )}
 
                   <div className="card-actions">
-                    {/* Mostrar wishlist solo si el usuario NO está autenticado */}
                     {!user && (
                       <button 
                         className="wishlist-heart" 
@@ -105,7 +103,6 @@ const CategoryPage = () => {
                       </button>
                     )}
                     
-                    {/* Mostrar botones de editar/eliminar si el usuario está autenticado */}
                     {user && (
                       <>
                         <button 

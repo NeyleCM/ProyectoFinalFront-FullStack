@@ -7,7 +7,7 @@ const Home = () => {
       <div className="background-image">
         <div className="text-overlay">
           <h1>Accesorios para Mujer</h1>
-          <p>Explora nuestras categorías de productos</p>
+          <p>Explora nuestros productos</p>
         </div>
        
       </div>

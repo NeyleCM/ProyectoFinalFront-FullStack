@@ -1,6 +1,6 @@
 .page-container {
     max-width: 500px;
-    margin: 100px auto 0 auto; /* Asegura el margen superior para evitar el Navbar */
+    margin: 100px auto 0 auto;
     padding: 20px;
     background-color: #ffffff;
     border-radius: 8px;

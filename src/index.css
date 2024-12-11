@@ -44,9 +44,9 @@ table {
 	border-spacing: 0;
 }
 
-
+/* ---- DESDE AQUÍ ----*/
 body {
-  font-family: 'Poppins', 'Open Sans', 'Roboto', 'Raleway', sans-serif; /* Prioridad de fuentes */
+  font-family: 'Poppins', 'Open Sans', 'Roboto', 'Raleway', sans-serif; 
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -54,16 +54,14 @@ body {
 
 h1, h2, h3 {
   font-family: 'Raleway', sans-serif;
-  font-weight: 700; /* Estilo de peso bold */
+  font-weight: 700;
 }
 
-/* Fuente para texto decorativo */
 .decorative-text {
   font-family: 'Sour Gummy', cursive;
 }
 
-/* Fuente para texto general */
 p {
   font-family: 'Roboto', sans-serif;
-  font-weight: 400; /* Estilo normal */
+  font-weight: 400; 
 }

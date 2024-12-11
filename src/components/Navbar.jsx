@@ -4,6 +4,7 @@ import { getAuth, signOut } from "firebase/auth";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faHeart } from '@fortawesome/free-regular-svg-icons';
+import '../index.css'
 import '../styles/Navbar.css'
 
 

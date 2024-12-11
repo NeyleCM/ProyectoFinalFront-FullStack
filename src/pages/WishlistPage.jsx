@@ -15,7 +15,7 @@ const WishlistPage = () => {
 
   return (
     <div className="wishlist-container">
-      <h1>Mi Lista de Deseos</h1>
+      <h1>Deseos</h1>
       {wishlist.length === 0 ? (
         <p>No tienes productos en tu lista de deseos.</p>
       ) : (
